@@ -2,62 +2,225 @@
 <html lang="id">
 
 <head>
-    <!-- Meta tag yang diperlukan -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('all.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte.min.css') }}">
 
     <style>
-        .nav-itemku:hover {
-            background-color: red;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6fa;
         }
 
-        .sidebarAdmin {
-            height: 100vh;
+        /* Sidebar Styles */
+        .main-sidebar {
+            background: #2c3e50;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        .descriptionWidth {
-            max-width: 17vw;
-        }
-        .hapusWidth,.editWidth{
-            max-width: 7vw;
-        }
-        .short-description,td{
-            font-size: 0.7vw;
-        }
-        .btn-warning,.btn-danger,.btn-info{
-            font-size: 0.6vw;
-        }
-        td{
-            width: 20px;
+        .nav-link {
+            border-radius: 8px;
+            margin: 4px 8px;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 1261px) {
-            .descriptionWidth {
-                max-width: 17vw;
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card Styles */
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .report-header {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background: #f8f9fa;
+        }
+
+        .report-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .report-author {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .report-content {
+            padding: 15px;
+        }
+
+        .report-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .report-description {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .report-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .report-actions {
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-approve {
+            background: #3498db;
+            color: white;
+            border: none;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            border: none;
+        }
+
+        .btn-read-more {
+            background: #2ecc71;
+            color: white;
+            border: none;
+        }
+
+        .report-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 15px auto;
+            display: block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .report-image {
+                width: 200px;
+                height: 200px;
             }
         }
 
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 15px;
+            }
+
+            .main-header {
+                padding: 10px;
+            }
+
+            .navbar-nav {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .report-card {
+                margin: 10px 0;
+            }
+
+            .report-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .sidebar-mini.sidebar-collapse .main-sidebar {
+                transform: translate(-250px, 0);
+            }
+        }
+
+        /* Animated elements */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
     </style>
-
-    <title>Halaman Admin</title>
-    <link rel="icon" type="image/png" href="{{ asset('dist/img/dashboard1.png') }}">
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
-    <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -70,10 +233,9 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.navbar -->
 
         <!-- Sidebar -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebarAdmin">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -99,7 +261,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('/admin') }}" class="nav-link">
+                            <a href="{{ url('/user') }}" class="nav-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-house-door mr-3" viewBox="0 0 16 16">
                                     <path
@@ -125,124 +287,118 @@
                         </li>
                     </ul>
                 </nav>
+
+
+
+
             </div>
         </aside>
 
-        <!-- Konten Utama -->
+        <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Halaman Admin</h1>
-                        </div>
-                    </div>
+                    <h1 class="mb-4">Daftar Laporan</h1>
                 </div>
             </section>
 
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Nama</th>
-                                                <th scope="col">Judul Laporan</th>
-                                                <th scope="col">Gambar</th>
-                                                <th scope="col">Deskripsi</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Persetujuan Laporan</th>
-                                                <th scope="col">Hapus</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            @php
-                                            $id = 1;
-                                            @endphp
-                                            @foreach ($reports as $report)
-                                            <tr>
-                                                <th scope="row">{{ $id++; }}</th>
-                                                <th>{{ $report->users->nama_depan }}</th>
-                                                <td>{{ Str::limit($report->judul_laporan, 100) }}</td>
-                                                <td>
-                                                    @if ($report->gambar)
-                                                    <img src="{{ asset('storage/reports/' . $report->gambar) }}"
-                                                        alt="Gambar Laporan" style="max-width: 7vw; height: auto;">
-                                                    @else
-                                                    Tidak ada gambar
-                                                    @endif
-                                                </td>
-                                                <td class="descriptionWidth">
-                                                    <div class="description-preview">
-                                                        <p class="short-description">
-                                                            {{ Str::limit($report->description, 100) }}</p>
-                                                        <!-- Menampilkan hanya 100 karakter -->
-                                                        <span class="full-description"
-                                                            style="white-space: pre-wrap; display: none;">{{ $report->description }}</span>
-                                                    </div>
-                                                    <button class="btn btn-info" onclick="toggleDescription(this)">Baca
-                                                        Selengkapnya</button>
-                                                </td>
-                                                <td>{{ $report->status ?? 'PANDING' }}</td>
-                                                <td><a href="{{ $report->id . '/editAdmin' }}"
-                                                        class="btn btn-warning editWidth">Persetujuan Laporan</a></td>
-                                                <td><a href="{{ $report->id . '/deleteAdmin' }}"
-                                                        class="btn btn-danger hapusWidth">Hapus</a></td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                        @foreach ($reports as $report)
+                        <div class="col-12 fade-in">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3 class="report-title">{{ Str::limit($report->judul_laporan, 100) }}</h3>
+                                    <p class="report-author">
+                                        <i class="fas fa-user mr-1"></i>
+                                        {{ $report->users->nama_depan }}
+                                    </p>
                                 </div>
-                                <div class="card-footer">
-                                    Footer
+
+                                <div class="report-content">
+                                    @if ($report->gambar)
+                                    <img src="{{ asset('storage/reports/' . $report->gambar) }}" alt="Gambar Laporan"
+                                        class="report-image">
+                                    @endif
+
+                                    <div class="report-description">
+                                        <p class="short-description">
+                                            {{ Str::limit($report->description, 150) }}
+                                        </p>
+                                        <div class="full-description" style="display: none;">
+                                            {{ $report->description }}
+                                        </div>
+                                    </div>
+
+                                    <span
+                                        class="report-status {{ $report->status == 'APPROVED' ? 'status-approved' : 'status-pending' }}">
+                                        {{ $report->status ?? 'PENDING' }}
+                                    </span>
+                                </div>
+
+                                <div class="report-actions">
+                                    <button class="btn btn-read-more" onclick="toggleDescription(this)">
+                                        <i class="fas fa-book-reader mr-1"></i> Baca Selengkapnya
+                                    </button>
+                                    <a href="{{ $report->id . '/editAdmin' }}" class="btn btn-approve">
+                                        <i class="fas fa-check-circle mr-1"></i> Persetujuan
+                                    </a>
+                                    <a href="{{ $report->id . '/deleteAdmin' }}" class="btn btn-delete">
+                                        <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </section>
         </div>
-        <!-- /.content-wrapper -->
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Versi</b> 3.2.0
             </div>
-            <strong>Hak Cipta &copy; {{date('Y')}} <a href="https://adminlte.io">AdminLTE.io</a>.</strong> Seluruh hak
-            dilindungi.
+            <strong>Hak Cipta &copy; {{date('Y')}} <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
         </footer>
     </div>
-    <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('adminlte.min.js') }}"></script>
 
     <script>
         function toggleDescription(button) {
-            const preview = button.previousElementSibling;
-            const fullDescription = preview.querySelector('.full-description');
-            const shortDescription = preview.querySelector('.short-description');
+            const card = button.closest('.report-card');
+            const shortDesc = card.querySelector('.short-description');
+            const fullDesc = card.querySelector('.full-description');
 
-            if (fullDescription.style.display === 'none') {
-                fullDescription.style.display = 'block';
-                shortDescription.style.display = 'none';
-                button.textContent = 'Sembunyikan';
+            if (fullDesc.style.display === 'none') {
+                fullDesc.style.display = 'block';
+                shortDesc.style.display = 'none';
+                button.innerHTML = '<i class="fas fa-chevron-up mr-1"></i> Sembunyikan';
             } else {
-                fullDescription.style.display = 'none';
-                shortDescription.style.display = 'block';
-                button.textContent = 'Baca Selengkapnya';
+                fullDesc.style.display = 'none';
+                shortDesc.style.display = 'block';
+                button.innerHTML = '<i class="fas fa-book-reader mr-1"></i> Baca Selengkapnya';
             }
         }
+
+        // Add fade-in animation to cards when they enter viewport
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
 
     </script>
 </body>
