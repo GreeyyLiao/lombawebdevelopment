@@ -21,7 +21,6 @@
             background-color: #f5f6fa;
         }
 
-        /* Sidebar Styles */
         .main-sidebar {
             background: #2c3e50;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -37,7 +36,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Card Styles */
         .report-card {
             background: white;
             border-radius: 12px;
@@ -159,18 +157,13 @@
             margin-bottom: 15px;
         }
 
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            .report-image {
-                width: 200px;
-                height: 200px;
-            }
-        }
-
-        /* Mobile Optimizations */
         @media (max-width: 768px) {
             .content-wrapper {
                 padding: 15px;
+            }
+            .report-image {
+                width: 200px;
+                height: 200px;
             }
 
             .main-header {
@@ -200,7 +193,6 @@
             }
         }
 
-        /* Animated elements */
         .fade-in {
             animation: fadeIn 0.5s ease-in;
         }
@@ -222,7 +214,6 @@
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
-        <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <ul class="navbar-nav">
                 <li class="nav-item d-none d-sm-inline-block">
@@ -233,15 +224,12 @@
                 </li>
             </ul>
         </nav>
-
-        <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ auth() ->user()->role}}</span>
             </a>
-
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
@@ -256,7 +244,6 @@
                         <p style="color: #fff; font-size: 20px">{{ auth() ->user()->nama_depan}}</p>
                     </div>
                 </div>
-
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -287,21 +274,14 @@
                         </li>
                     </ul>
                 </nav>
-
-
-
-
             </div>
         </aside>
-
-        <!-- Content -->
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <h1 class="mb-4">Daftar Laporan</h1>
                 </div>
             </section>
-
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -315,13 +295,11 @@
                                         {{ $report->users->nama_depan }}
                                     </p>
                                 </div>
-
                                 <div class="report-content">
                                     @if ($report->gambar)
                                     <img src="{{ asset('storage/reports/' . $report->gambar) }}" alt="Gambar Laporan"
                                         class="report-image">
                                     @endif
-
                                     <div class="report-description">
                                         <p class="short-description">
                                             {{ Str::limit($report->description, 150) }}
@@ -330,13 +308,11 @@
                                             {{ $report->description }}
                                         </div>
                                     </div>
-
                                     <span
                                         class="report-status {{ $report->status == 'APPROVED' ? 'status-approved' : 'status-pending' }}">
                                         {{ $report->status ?? 'PENDING' }}
                                     </span>
                                 </div>
-
                                 <div class="report-actions">
                                     <button class="btn btn-read-more" onclick="toggleDescription(this)">
                                         <i class="fas fa-book-reader mr-1"></i> Baca Selengkapnya
@@ -355,7 +331,6 @@
                 </div>
             </section>
         </div>
-
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Versi</b> 3.2.0
@@ -363,18 +338,15 @@
             <strong>Hak Cipta &copy; {{date('Y')}} <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
         </footer>
     </div>
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('adminlte.min.js') }}"></script>
-
     <script>
         function toggleDescription(button) {
             const card = button.closest('.report-card');
             const shortDesc = card.querySelector('.short-description');
             const fullDesc = card.querySelector('.full-description');
-
             if (fullDesc.style.display === 'none') {
                 fullDesc.style.display = 'block';
                 shortDesc.style.display = 'none';
@@ -385,8 +357,6 @@
                 button.innerHTML = '<i class="fas fa-book-reader mr-1"></i> Baca Selengkapnya';
             }
         }
-
-        // Add fade-in animation to cards when they enter viewport
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver(entries => {
@@ -396,10 +366,8 @@
                     }
                 });
             });
-
             cards.forEach(card => observer.observe(card));
         });
-
     </script>
 </body>
 
